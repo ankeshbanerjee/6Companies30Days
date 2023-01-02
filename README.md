@@ -1,2 +1,7 @@
-# 6Companies30Days
-#ReviseWithArsh
+# #6companies30Days
+ #ReviseWithArsh - Coding challenge by Arsh Goyal, consisting of top 90-100 most frequently asked and most important DSA questions.
+
+TASK STARTED FROM 1 JAN 2023 TO 30 JAN 2023
+
+
+1. MICROSOFT
