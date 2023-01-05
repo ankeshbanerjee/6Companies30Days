@@ -1,0 +1,27 @@
+Perfect Rectangle
+(https://leetcode.com/problems/perfect-rectangle/)
+
+CODE: 
+
+class Solution {
+public:
+    bool isRectangleCover(vector<vector<int>>& rectangles) {
+    map<pair<int, int>, int> pointCounts;
+    for (auto& it : rectangles) {
+      pointCounts[{it[0], it[1]}]++;
+      pointCounts[{it[2], it[3]}]++;
+      pointCounts[{it[0], it[3]}]--;
+      pointCounts[{it[2], it[1]}]--;
+    }
+    
+    int count = 0;
+    for (auto it : pointCounts) {
+      if (it.second != 0) {
+        if (abs(it.second) != 1) return false;
+        count++;
+      }
+    }
+
+    return count == 4;      
+    }
+};

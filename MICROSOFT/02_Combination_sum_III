@@ -1,0 +1,41 @@
+Combination Sum with a twist.
+(https://leetcode.com/problems/combination-sum-iii/)
+
+CODE: 
+
+class Solution {
+public:
+    vector<vector<int>> ans;
+    int getSum (vector<int>& combination){
+        int sum = 0;
+        for (auto it: combination){
+            sum += it;
+        }
+        return sum;
+    }
+    void solve (int k, int n, vector<int>& combination, int num){
+        // base case
+        if (k==0){
+            if (getSum(combination) == n){
+                ans.push_back(combination);
+            }
+            return;
+        }
+        if (num > 9)
+            return;
+
+        combination.push_back(num);
+        // recursive call
+        solve(k-1, n, combination, num+1);
+        // backtrack
+        combination.pop_back();
+        // check for starting with next num
+        solve (k, n, combination, num+1);
+    }
+    vector<vector<int>> combinationSum3(int k, int n) {
+        vector<int> combination;
+        int num = 1;
+        solve (k, n, combination, num);
+        return ans;
+    }
+};

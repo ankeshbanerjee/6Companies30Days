@@ -1,0 +1,33 @@
+Bulls and Cows
+(https://leetcode.com/problems/bulls-and-cows/)
+
+CODE: 
+
+class Solution {
+public:
+    string getHint(string secret, string guess) {
+        int n = secret.length();
+        int bulls = 0, cows = 0;
+        map <int, int> cntSecret;
+        map <int, int> cntGuess;
+
+        for (int i=0; i<n; i++){
+            if (secret[i] == guess[i]){
+                bulls++;
+            }
+            else{
+                cntSecret[secret[i]-'0']++;
+                cntGuess[guess[i]-'0']++;
+            }
+        }
+
+        for (auto it: cntGuess){
+            if (cntSecret.find(it.first) != cntSecret.end()){
+                cows += min(cntSecret[it.first], it.second);
+            }
+        }
+
+        string ans = to_string(bulls) + "A" + to_string(cows) + "B";
+        return ans;
+    }
+};

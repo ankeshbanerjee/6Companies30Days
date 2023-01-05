@@ -1,0 +1,24 @@
+You are given an integer array nums of length n. Return maximum length of Rotation Function.
+(https://leetcode.com/problems/rotate-function/)
+
+CODE:
+
+class Solution {
+public:
+    int maxRotateFunction(vector<int>& nums) {
+        int sum = 0, fsum = 0, ans = 0, n = nums.size();
+        // for original array
+        for (int i=0; i<n; i++){
+            sum += nums[i];
+            fsum += i*nums[i];
+        }
+        // rotations
+        ans = fsum;
+        for (int i=n-1; i>=0; i--){
+            fsum = fsum + sum - nums[i]*n;
+            ans = max (ans, fsum);
+        }
+
+        return ans;
+    }
+};

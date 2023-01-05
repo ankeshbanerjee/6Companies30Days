@@ -1,0 +1,53 @@
+You are given an array of strings tokens that represents an arithmetic expression in a Reverse Polish Notation
+(https://leetcode.com/problems/evaluate-reverse-polish-notation/)
+
+CODE:
+
+class Solution {
+private:
+    long evaluate (long a, string op, long b){
+        long ans;
+        
+        if (op == "+")
+            ans = a+b;
+        else if (op == "-")
+            ans =  a-b;
+        else if (op == "*")
+            ans =  a*b;
+        else if (op == "/")
+            ans =  a/b;
+
+        return ans;
+    }
+
+public:
+    int evalRPN(vector<string>& tokens) {
+        stack <long> s;
+        int size = tokens.size();
+        for (auto it: tokens){
+            if (it == "+" || it == "-" || it == "*" || it == "/"){
+                string operation = it;
+                long firstOprnd, secOprnd;
+                if (!s.empty()){
+                    secOprnd = s.top();
+                    s.pop();
+                }
+                if (!s.empty()){
+                    firstOprnd = s.top();
+                    s.pop();
+                    s.push(evaluate(firstOprnd, operation, secOprnd));
+                }
+            }
+            else{
+                s.push(stol(it));
+            }
+            
+        }
+
+        long ans = -1;
+        if (!s.empty()){
+            ans = s.top();
+        }
+        return (int)ans;
+    }
+};
