@@ -1,0 +1,35 @@
+Number of boomerangs
+(https://leetcode.com/problems/number-of-boomerangs/)
+
+CODE:
+
+class Solution {
+public:
+    int numberOfBoomerangs(vector<vector<int>>& points) {
+        int n = points.size();
+        int ans = 0;
+        if (n<3)
+            return 0;
+        for (int i=0; i<n; i++){
+            // map <distance, countOfDistance>
+            unordered_map<int, int>disCount;
+            for (int j=0; j<n; j++){
+                if (j==i)continue;
+                int dx = points[j][0] - points[i][0];
+                int dy = points[j][1] - points[i][1];
+
+                long long dist = dx*dx;
+                dist += dy*dy;
+
+                disCount[dist]++;
+            }
+            for (auto it: disCount){
+                if (it.second>1){
+                    // the two points whose distance from points[i] are same, can be chosen in np2 = n*(n-1) ways
+                    ans += it.second * (it.second -1);
+                }
+            }
+        }
+        return ans;
+    }
+};
