@@ -1,0 +1,26 @@
+Minimum consecutive cards to pickup
+(https://leetcode.com/problems/minimum-consecutive-cards-to-pick-up/)
+
+CODE:
+
+class Solution {
+public:
+    int minimumCardPickup(vector<int>& cards) {
+        // map to store last occurred index
+        unordered_map<int, int> mp;
+        int n = cards.size();
+        int ans = INT_MAX;
+
+        for (int i=0; i<n; i++){
+            if (mp.find(cards[i]) != mp.end()){
+                // count = current index - previous index + 1
+                int count = i - mp[cards[i]] + 1;
+                ans = min (ans, count);
+            }
+            // storing the current index, which will be used as last occurred index in the next interations
+            mp[cards[i]] = i;
+        }
+
+        return (ans != INT_MAX) ? ans : -1;
+    }
+};
