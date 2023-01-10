@@ -1,0 +1,49 @@
+Invalid transactions in an EMI
+(https://leetcode.com/problems/invalid-transactions/)
+
+CODE:
+
+class Solution {
+private:
+    void seperate (string s, vector<string> &v){
+        string t;
+        for (int i=0; i<s.length(); i++){
+            if (s[i] == ','){
+                v.push_back(t);
+                t.clear();
+            }
+            else{
+                t.push_back(s[i]);
+            }
+        }
+        v.push_back(t);
+    }
+public:
+    vector<string> invalidTransactions(vector<string>& transactions) {
+        unordered_map <string, vector<string>> m;
+        for (int i=0; i<transactions.size(); i++){
+            vector<string> s;
+            seperate (transactions[i], s);
+            m[transactions[i]] = s;
+        }
+        vector<string> invalid;
+        for (int i=0; i<transactions.size(); i++){
+            if (stoi(m[transactions[i]][2]) > 1000){
+                invalid.push_back(transactions[i]);
+            }
+            else{
+                for (int j=0; j<transactions.size(); j++){
+                    if (j!=i){
+                        if (abs (stoi(m[transactions[i]][1]) - stoi(m[transactions[j]][1])) <= 60){
+                            if (m[transactions[i]][0] == m[transactions[j]][0] && m[transactions[i]][3] != m[transactions[j]][3]){
+                                invalid.push_back(transactions[i]);
+                                break;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        return invalid;
+    }
+};
