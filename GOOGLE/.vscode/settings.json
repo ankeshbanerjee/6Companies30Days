@@ -1,0 +1,6 @@
+{
+    "files.associations": {
+        "*.ejs": "html",
+        "09_maximum_number_of_coins_you_can_get": "cpp"
+    }
+}
