@@ -1,0 +1,6 @@
+{
+    "files.associations": {
+        "*.ejs": "html",
+        "06_max_subarray_min_product": "cpp"
+    }
+}
